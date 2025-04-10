@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice Generator</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="bg-dark text-white text-center py-3">
+        <h1>Invoice Generator</h1>
+        <p>Create professional invoices with ease.</p>
+        <button id="darkModeToggle" class="btn btn-sm btn-outline-light"><i class="fas fa-moon"></i> Dark Mode</button>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row">
+
+            <!-- Sidebar -->
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">
+                                <i class="fas fa-file-invoice"></i> New Invoice <span class="sr-only">(current)</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fas fa-history"></i> Invoice History
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="fas fa-cog"></i> Settings
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <!-- Main Content -->
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">New Invoice</h1>
+                    <div class="btn-toolbar mb-2 mb-md-0">
+                        <button id="refreshData" class="btn btn-sm btn-outline-secondary">
+                            <i class="fas fa-sync-alt"></i> Refresh Data
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Input Section -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        Customer Information
+                    </div>
+                    <div class="card-body">
+                        <form id="customerForm">
+                            <div class="form-group">
+                                <label for="customerName">Customer Name:</label>
+                                <input type="text" class="form-control" id="customerName" placeholder="Enter customer name" required>
+                                <div class="invalid-feedback">Please enter customer name.</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="customerAddress">Address:</label>
+                                <textarea class="form-control" id="customerAddress" rows="3" placeholder="Enter customer address" required></textarea>
+                                <div class="invalid-feedback">Please enter customer address.</div>
+                            </div>
+                            <div class="form-group">
+                                <label for="customerContact">Contact Information:</label>
+                                <input type="text" class="form-control" id="customerContact" placeholder="Enter customer contact information" required>
+                                <div class="invalid-feedback">Please enter customer contact information.</div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Item Table -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        Item Details
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" id="itemTable">
+                                <thead>
+                                    <tr>
+                                        <th>Item Name</th>
+                                        <th>Quantity</th>
+                                        <th>Unit Price</th>
+                                        <th>Tax Rate (%)</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><input type="text" class="form-control itemName" required></td>
+                                        <td><input type="number" class="form-control quantity" value="1" min="1" required></td>
+                                        <td><input type="number" class="form-control unitPrice" value="0.00" min="0.00" step="0.01" required></td>
+                                        <td><input type="number" class="form-control taxRate" value="0.00" min="0.00" step="0.01" required></td>
+                                        <td><button class="btn btn-danger removeItem"><i class="fas fa-trash"></i></button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button id="addItem" class="btn btn-success"><i class="fas fa-plus"></i> Add Item</button>
+                    </div>
+                </div>
+
+                <!-- Discount and Calculation Section -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        Calculations
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="discountType">Discount Type:</label>
+                            <select class="form-control" id="discountType">
+                                <option value="percentage">Percentage (%)</option>
+                                <option value="fixed">Fixed Amount</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="discountValue">Discount Value:</label>
+                            <input type="number" class="form-control" id="discountValue" value="0.00" min="0.00" step="0.01">
+                        </div>
+                        <button id="calculateInvoice" class="btn btn-primary">Calculate Invoice</button>
+                    </div>
+                </div>
+
+                <!-- Preview Section -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        Invoice Preview
+                    </div>
+                    <div class="card-body">
+                        <div id="invoicePreview">
+                            </div>
+                        </div>
+                    </div>
+                <!-- API Display Section -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        API Data Display
+                        <button id="refreshData" class="btn btn-sm btn-outline-secondary float-right">
+                            <i class="fas fa-sync-alt"></i> Refresh Data
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div id="apiDataDisplay">
+                            <!-- API data will be displayed here -->
+                        </div>
+                    </div>
+                </div>
+
+                <button id="submitInvoice" class="btn btn-success btn-lg float-right"><i class="fas fa-check"></i> Submit Invoice</button>
+
+            </main>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white text-center py-3">
+        &copy; 2024 Invoice Generator. All rights reserved.
+    </footer>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>

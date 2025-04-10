@@ -1,0 +1,212 @@
+/* style.css */
+
+:root {
+    --primary-color: #ffc107; /* Yellow */
+    --secondary-color: #000000; /* Black */
+    --background-color: #f8f9fa; /* Light Gray */
+    --text-color: #212529; /* Dark Gray */
+    --dark-mode-background: #343a40; /* Dark Gray */
+    --dark-mode-text: #ffffff; /* White */
+    --card-background: #ffffff;
+    --card-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.15);
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+    padding-bottom: 50px; /* Space for the footer */
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+    background-color: var(--dark-mode-background);
+    color: var(--dark-mode-text);
+}
+
+body.dark-mode .card {
+    background-color: #444 !important;
+    color: var(--dark-mode-text);
+}
+
+body.dark-mode .sidebar {
+    background-color: #343a40;
+}
+
+body.dark-mode .nav-link {
+    color: #fff;
+}
+
+body.dark-mode .bg-light {
+    background-color: #343a40 !important;
+}
+/* Header */
+header {
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    padding: 1rem 0;
+    margin-bottom: 2rem;
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.25);
+}
+
+header h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+header p {
+    font-size: 1.1rem;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 100; /* Behind the navbar */
+    padding: 48px 0 0; /* Height of navbar */
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+}
+
+.sidebar-sticky {
+    position: relative;
+    top: 0;
+    height: calc(100vh - 48px);
+    padding-top: .5rem;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+}
+
+.nav-link {
+    color: var(--text-color);
+}
+
+.nav-link.active {
+    color: var(--primary-color);
+}
+
+.nav-link:hover {
+    color: var(--primary-color);
+}
+
+/* Main Content */
+main {
+    padding: 15px;
+}
+
+.card {
+    background-color: var(--card-background);
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: var(--card-shadow);
+    margin-bottom: 1.5rem;
+}
+
+.card-header {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    font-weight: bold;
+    border-bottom: none;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.5rem 0.5rem 0 0;
+}
+
+.form-control {
+    border-radius: 0.25rem;
+}
+
+.btn-primary, .btn-success {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: var(--secondary-color);
+}
+
+.btn-primary:hover, .btn-success:hover {
+    background-color: #e0a800;
+    border-color: #d39e00;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: #fff;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}
+
+/* Floating Action Button (Add Item) */
+#addItem {
+    position: relative;
+    /* bottom: 20px; */
+    /* right: 20px; */
+    z-index: 999;
+}
+
+/* Invoice Preview */
+#invoicePreview {
+    border: 1px solid #ddd;
+    padding: 1rem;
+    margin-top: 1rem;
+    border-radius: 0.25rem;
+}
+
+/* Footer */
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    text-align: center;
+    padding: 0.5rem 0;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sidebar {
+        position: static;
+        height: auto;
+    }
+
+    .sidebar-sticky {
+        height: auto;
+    }
+
+    main {
+        padding: 1rem;
+    }
+
+    header h1 {
+        font-size: 2rem;
+    }
+}
+
+/* Utility Classes */
+.mt-4 {
+    margin-top: 1.5rem !important;
+}
+
+.mb-4 {
+    margin-bottom: 1.5rem !important;
+}
+
+.ml-auto {
+    margin-left: auto !important;
+}
