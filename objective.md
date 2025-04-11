@@ -4,7 +4,7 @@
 This project implements a dynamic invoice generator using JavaScript, HTML, and CSS. It allows users to input customer information, add items to the invoice, calculate the total amount including tax and discounts, preview the invoice, and clear the form. The application includes dark mode functionality and integrates with an external API to display product information.
 
 ## Output
-<iframe src="https://github.com/niat-web/Invoice_Generator" height="1000" width="300" title="Invoice_Generator"></iframe>
+<iframe src="https://niat-web.github.io/Invoice_Generator/" height="1000" width="300" title="Invoice_Generator"></iframe>
 
 ## Project Requirements
 **Technologies:** HTML, CSS, JavaScript, Bootstrap (implied), Font Awesome (implied), API integration (using `fetch`)
